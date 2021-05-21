@@ -1,6 +1,6 @@
 import './App.css';
 import {useState, useEffect} from 'react';
-import {fetchMain} from './services/main-service.js';
+import {fetchMain} from '../services/main-service.js';
 
 
 function App() {
