@@ -11,7 +11,7 @@ function fetchMain() {
       else {
         throw new Error('No luck');
       }
-    });
+    })
 }
 
 export {
