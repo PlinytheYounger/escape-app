@@ -18,12 +18,12 @@
     "mongoose": "^5.12.10",
     "nodemon": "^2.0.7",
     "path": "^0.12.7",
-  
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "repository": {
     "type": "git",
