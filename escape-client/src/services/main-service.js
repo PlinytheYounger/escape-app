@@ -4,7 +4,7 @@ const BASE_URL = 'https://escape-travel-app.herokuapp.com/';
 function fetchMain() {
     return fetch(`/`, {
     method: 'GET',
-    headers: new Headers({'Content-Type': 'application/json',
+    headers: new Headers({'Content-Type': 'application/json'})
     })
     .then(res => {
       if(res.ok) return res.json();
