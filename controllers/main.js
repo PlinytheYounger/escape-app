@@ -3,6 +3,5 @@ module.exports = {
 }
 
 function main(req, res) {
-    // res.json('Hello dear world!')
-    console.log('connection!')
+    res.json('Hello dear world!')
 }
