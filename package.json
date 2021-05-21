@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "15.5.0",
+    "npm": "7.13.0"
+  }
   "dependencies": {
     "ansi-styles": "^4.3.0",
     "abbrev": "^1.1.1",
