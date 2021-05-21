@@ -21,7 +21,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd escape-client && npm install && npm run build"
   },
   "engines": {
     "node": "15.5.0",
