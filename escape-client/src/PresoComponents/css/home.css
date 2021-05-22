@@ -1,0 +1,25 @@
+.backgroundStyle {
+    height: 80vh;
+    width: 100vw;
+}
+
+.imageContainer {
+    height: 80vh;
+    width: 100vw;
+    font-family: "Dancing Script", cursive;
+}
+
+.imageStyle {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.h2Style {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    color: white;
+    font-size: 72px;
+    font-family: "Dancing Script", cursive;
+}
