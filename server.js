@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'escape-client/build')));
-
+app.use(express.static("escape-client/public"))
 // import routes
 const userRouter = require('./routes/user.js');
 const mainRouter = require('./routes/main.js');
@@ -17,7 +17,7 @@ const mainRouter = require('./routes/main.js');
 // const walletRouter = require('./routes/wallet.js');
 // const mapRouter = require('./routes/map.js');
 
-// require('./config/database');
+require('./config/database');
 require('dotenv').config()
 
 // app.use(require('./config/auth'));
@@ -28,7 +28,7 @@ app.use(logger('dev'));
 app.use(express.json());
 
 // mount routes
-app.use('/', mainRouter);
+// app.use('/', mainRouter);
 app.use('/api/user', userRouter)
 // app.use('/trip', tripRouter);
 // app.use('/map', mapRouter);
@@ -36,9 +36,9 @@ app.use('/api/user', userRouter)
 // app.use('/travel', travelRouter);
 // app.use('/wallet', walletRouter);
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/escape-client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname+'/escape-client/build/index.html'));
+// });
 
 const port = process.env.PORT || 3001;
 

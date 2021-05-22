@@ -1,39 +1,40 @@
 import './App.css';
 import {useState, useEffect} from 'react';
 import {fetchMain} from './services/main-service.js';
+import SignUpForm from './DataComponents/SignupForm.js';
+import {getUser, logout} from './services/user-service';
 
-
-function App() {
+function App(props) {
 
   const [getState, setState] = useState();
-  // const [userState, setUserState] = useState({user: getUser()});
+  const [userState, setUserState] = useState({user: getUser()});
 
-  // const handleLogout = () => {
-  //   logout();
-  //   setUserState({user: null})
-  // }
+  const handleLogout = () => {
+    logout();
+    setUserState({user: null})
+  }
 
-  // const handleLogin = () => {
-  //   setUserState({user: getUser()})
-  // }
+  const handleLogin = () => {
+    setUserState({user: getUser()})
+  }
 
-  // const handleSignup = () => {
-  //   setUserState({user: getUser()});
-  // }
+  const handleSignup = () => {
+    setUserState({user: getUser()});
+  }
 
-  useEffect(() => {
-    async function getMain() {
-      const data = await fetchMain();
-      console.log(data)
-      setState({phrase: data});
-    }
-    getMain();
-  }, [])
+  // useEffect(() => {
+  //   async function getMain() {
+  //     const data = await fetchMain();
+  //     console.log(data)
+  //     setState({phrase: data});
+  //   }
+  //   getMain();
+  // }, [])
 
   return (
     <div className="App">
-      <h2>Hello ze world!</h2>
-      <h2>{getState && getState.phrase}</h2>
+      <h1>Escape</h1>
+      <SignUpForm {...props} handleLogout={handleLogout} handleSignup={handleSignup}/>
     </div>
   );
 }
