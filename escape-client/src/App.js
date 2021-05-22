@@ -1,7 +1,6 @@
 import './App.css';
-import {useState, useEffect} from 'react';
-import {fetchMain} from './services/main-service.js';
-import SignUpForm from './DataComponents/SignupForm.js';
+import {useState} from 'react';
+import SignUpForm from './DataComponents/SignUpForm.js';
 import {getUser, logout} from './services/user-service';
 
 function App(props) {
