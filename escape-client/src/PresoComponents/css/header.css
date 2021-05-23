@@ -1,0 +1,53 @@
+/* 
+#c6d7b9	= pale green
+#f6b9ad	= light pink
+#ee6f68	= dark pink
+#f68f3c	= orange
+#5e8d5a = dark green
+*/
+
+.barTheme {
+    background-color: #c6d7b9;
+    color: #5e8d5a;
+    font-size: 20px;
+    height: 12vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  };
+  
+.titleTheme {
+      font-size: 32px;
+      font-weight: bold;
+}
+  
+.linkTheme {
+      text-decoration: none;
+      color: #5e8d5a;
+}
+
+.buttonTheme {
+    background-color: #c6d7b9;
+    color: #5e8d5a;
+    border: none;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.titleName {
+    display: flex;
+    align-items: left;
+    font-family: 'Montserrat', sans-serif;
+    width: 25%;
+    margin-right: 10%;
+}
+
+.navBar {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50%;
+}
