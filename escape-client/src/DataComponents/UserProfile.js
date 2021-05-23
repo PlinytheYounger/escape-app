@@ -52,9 +52,9 @@ export default function UserProfile(props) {
     const [expanded, setExpanded] = useState(false);
     const [userState, setUserState] = useState([])
 
-    // const handleChange = (panel) => (event, isExpanded) => {
-    //   setExpanded(isExpanded ? panel : false);
-    // };
+    const handleChange = (panel) => (event, isExpanded) => {
+      setExpanded(isExpanded ? panel : false);
+    };
 
 
     // function deleteTrip(id) {
@@ -90,15 +90,9 @@ export default function UserProfile(props) {
                 
             </div>
             <div className="user_information" >
-                    {/* <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} >
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header"
-                        > */}
+                <div className={"userPhotos", "accordionContainer"} expanded={expanded === 'panel1' onChange={handleChange('panel1')}>
                         <h2>Photo Gallery</h2>
-                        {/* </AccordionSummary>
-                        <AccordionDetails style={accordion_style} > */}
+                    <div className="accordionMain">
                             <div>
                                 <h2>placeholder</h2>
                             </div>
@@ -111,14 +105,9 @@ export default function UserProfile(props) {
                             <div>
                                 <h2>placeholder</h2>
                             </div>
-                        {/* </AccordionDetails>
-                    </Accordion>
-                    <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} >
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel2bh-content"
-                        id="panel2bh-header"
-                        > */}
+
+                </div>
+                        
                         <h2>Saved Trips</h2>
                         {/* </AccordionSummary>
                         <AccordionDetails style={accordion_style_two}> */}
@@ -136,7 +125,7 @@ export default function UserProfile(props) {
                                         </div>
                                     )
                                 })}
-                            </div> }
+                            </div>
                         {/* </AccordionDetails>
                     </Accordion>
                     <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')} >

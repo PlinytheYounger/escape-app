@@ -165,7 +165,6 @@ export default function NewTripForm(props) {
     async function fetchUser() {
         try {
             const data = await fetchUserProfile(props.user._id);
-            console.log(data)
             setUserState(data)
         } catch (err) {
             console.log(err.message)
@@ -175,7 +174,7 @@ export default function NewTripForm(props) {
 
     useLayoutEffect(() => {
         fetchUser();
-    }, [props.user._ic])
+    }, [props.user._id])
 
     return(
         <div id="create-new-trip-container">
