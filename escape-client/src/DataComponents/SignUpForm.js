@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { signup } from '../services/user-service.js'
-// import './signupform.css';
+import './css/signupform.css';
 
 export default function SignupForm (props) {
   const history = useHistory();
@@ -38,8 +38,7 @@ export default function SignupForm (props) {
 //   }
 
     return (
-      <div>
-        <h2 className="h2Style">Sign Up</h2>
+      <div className="pageStyle">
         <form className="containerStyle" autoComplete="off" onSubmit={handleSubmit} >
           <input 
          
@@ -79,7 +78,7 @@ export default function SignupForm (props) {
           />
           <div>
             <div>
-              <button className="h2Style" type="submit" >Sign Up</button>
+              <button className="signUpFont" type="submit" >Sign Up</button>
               {/* <Link to='/'><Button> Cancel</Button></Link> */}
             </div>
           </div>

@@ -3,6 +3,7 @@ require('dotenv').config();
 const SECRET = process.env.SECRET;
 
 module.exports = function(req, res, next) {
+  console.log(req.body)
   // Check for the token being sent in three different ways
   let token = req.get('Authorization') || req.query.token || req.body.token;
   if (token) {

@@ -1,0 +1,26 @@
+.savedTrips {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.button-user {
+    color: #5e8d5a;
+    background-color: white;
+    border: 2px solid #5e8d5a;
+    margin: 2%;
+    width: 50vw;
+}
+
+.linkStyle {
+    text-decoration: none;
+    color: #5e8d5a;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.tripName {
+    margin-right: 5%; 
+}

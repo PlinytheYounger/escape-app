@@ -23,6 +23,7 @@ function getUser() {
 }
 
 function login(creds) {
+  console.log(creds)
   return fetch(`/api/user/login`, {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json',
@@ -46,8 +47,7 @@ function fetchUserProfile(user_id) {
   return fetch(`/api/user/${user_id}`, {
     method: 'GET',
     headers: new Headers({'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'}),
-    mode: 'no-cors',
+      'Access-Control-Allow-Origin': '*'})
   })
   .then(res => {
     if(res.ok) return res.json();

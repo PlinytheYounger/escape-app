@@ -8,7 +8,7 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
-  // trip_ids: [{type: Schema.Types.ObjectId, ref: 'Trip'}],
+  trip_ids: [{type: Schema.Types.ObjectId, ref: 'Trip'}],
 }, {
   timestamps: true
 });
