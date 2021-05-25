@@ -1,8 +1,8 @@
-import Input from '../FormInputs';
+import Input from '../PresoComponents/FormInputs';
 import {useState} from 'react';
-import {createActivity} from '../../../services/activityService.js';
+import {createActivity} from '../services/activity-service.js';
 import {useHistory} from 'react-router-dom';
-import './activity.css';
+// import './activity.css';
 
 export default function NewActivityForm(props) {
 

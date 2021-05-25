@@ -1,5 +1,6 @@
 import './css/footer.css';
 
+
 export default function Footer() {
     const barTheme = {
         backgroundColor: "#c6d7b9",

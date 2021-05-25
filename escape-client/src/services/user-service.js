@@ -23,7 +23,6 @@ function getUser() {
 }
 
 function login(creds) {
-  console.log(creds)
   return fetch(`/api/user/login`, {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json',

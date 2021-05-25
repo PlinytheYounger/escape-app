@@ -5,9 +5,8 @@ import {fetchTripProfile} from '../services/trip-service';
 
 import './css/tripPlanner.css';
 
-import NewTripForm from './NewTripForm';
 import Map from './Map.js';
-
+import PanelContainer from './PanelContainer.js';
 export default function TripContainer(props) {
 
     const [tripState, setTripState] = useState();
@@ -17,7 +16,22 @@ export default function TripContainer(props) {
     STYLING
     ######################################
     ######################################*/
-   
+    const containerStyle = {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        height: "80vh",
+        width: "100vw",
+        alignItems: "center"
+    }
+
+    const leftContainerStyle = {
+        width: "45%",
+    }
+
+    const rightContainerStyle = {
+        width: "55%"
+    }
 
     /*######################################
     ######################################
@@ -28,18 +42,9 @@ export default function TripContainer(props) {
     
     const {id} = useParams();
 
-    // useEffect(() => {
-    //     async function fetchTrip() {
-    //         const data = await fetchTripProfile(id)
-    //         setTripState(data)
-    //     }
-    //     fetchTrip();
-    // }, [id]);
-
     async function fetchTrip() {
         try {
             const data = await fetchTripProfile(id);
-            console.log(data)
             setTripState(data)
         } catch (err) {
             console.log(err.message)
@@ -56,13 +61,11 @@ export default function TripContainer(props) {
     ######################################
     ######################################*/
     return(
-        <div className="trip-main-container">
-            <div className="accordionContainer">
-                {/* <TabPanel user={props.user} trip={tripState} /> */}
-                {/* Link to create a new trip form */}
-                {/* <NewTripForm user={props.user}/> */}
+        <div style={containerStyle}>
+            <div style={leftContainerStyle}>
+                <PanelContainer user={props.user} trip={tripState} />
             </div>
-            <div className="mapContainer">
+            <div style={rightContainerStyle}>
                 <h2>{tripState ? tripState.name : 'Trips!'}</h2>
                 <Map trip={tripState} trip_id={id}/> 
             </div>

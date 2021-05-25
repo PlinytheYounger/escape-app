@@ -1,4 +1,4 @@
-import Input from '../FormInputs';
+import Input from '../PresoComponents/FormInputs';
 import {useState} from 'react';
 import {createTravel} from '../../../services/travelService.js';
 import {useHistory} from 'react-router-dom';

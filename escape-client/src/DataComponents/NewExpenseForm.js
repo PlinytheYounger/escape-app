@@ -1,8 +1,8 @@
-import Input from '../FormInputs';
+import Input from '../PresoComponents/FormInputs';
 import {useState} from 'react';
-import {createExpense} from '../../../services/walletService.js';
+import {createExpense} from '../services/wallet-service.js';
 import {useHistory} from 'react-router-dom';
-import '../tripPlanner.css';
+// import '../tripPlanner.css';
 
 export default function NewExpenseForm(props) {
     const [getFormState, setFormState] = useState({

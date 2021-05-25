@@ -1,5 +1,5 @@
 function createActivity(activity, trip_id) {
-    return fetch(`${BASE_URL}new/${trip_id}`, {
+    return fetch(`/api/activity/new/${trip_id}`, {
       method: 'POST',
       headers: new Headers({'Content-Type': 'application/json', 
         'Access-Control-Allow-Origin': '*'}),
@@ -13,7 +13,7 @@ function createActivity(activity, trip_id) {
   }
   
   function fetchActivity(activity_id) {
-    return fetch(`${BASE_URL}${activity_id}`, {
+    return fetch(`/api/activity/${activity_id}`, {
       method: 'GET',
       headers: new Headers({'Content-Type': 'application/json', 
         'Access-Control-Allow-Origin': '*'}),
