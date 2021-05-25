@@ -1,9 +1,9 @@
 
 function createTrip(trip, user_id) {
-  return fetch(`api/trip/new/${user_id}`, {
+  return fetch(`/api/trip/new/${user_id}`, {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json', 
-      'Access-Control-Allow-Origin': '*'}),
+    'Access-Control-Allow-Origin': '*'}),
     body: JSON.stringify(trip)
   })
   .then(res => {
@@ -13,11 +13,12 @@ function createTrip(trip, user_id) {
   });
 }
 
-function fetchTripProfile(trip_id) {
-  return fetch(`api/trip/${trip_id}`, {
-    method: 'GET',
+
+function deleteTrip(trip_id) {
+  return fetch(`/api/trip/delete/${trip_id}`, {
+    method: 'DELETE',
     headers: new Headers({'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'}),
+    'Access-Control-Allow-Origin': '*'}),
   })
   .then(res => {
     if(res.ok) return res.json();
@@ -25,11 +26,11 @@ function fetchTripProfile(trip_id) {
   });
 }
 
-function deleteTrip(trip_id) {
-  return fetch(`api/trip/delete/${trip_id}`, {
-    method: 'DELETE',
+function fetchTripProfile(trip_id) {
+  return fetch(`/api/trip/${trip_id}`, {
+    method: 'GET',
     headers: new Headers({'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'}),
+      'Access-Control-Allow-Origin': '*'})
   })
   .then(res => {
     if(res.ok) return res.json();

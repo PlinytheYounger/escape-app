@@ -10,12 +10,12 @@
     background-color: #c6d7b9;
     color: #5e8d5a;
     font-size: 20px;
-    height: 12vh;
+    height: 11vh;
     width: 100vw;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
   };
   
 .titleTheme {
@@ -29,7 +29,6 @@
 }
 
 .buttonTheme {
-    background-color: #c6d7b9;
     color: #5e8d5a;
     border: none;
     font-size: 20px;

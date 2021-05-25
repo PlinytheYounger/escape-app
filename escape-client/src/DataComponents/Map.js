@@ -1,5 +1,5 @@
 // import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
-import {useEffect, useState, useRef} from 'react';
+import {useLayoutEffect, useState, useRef} from 'react';
 import {fetchTripProfile} from '../services/trip-service';
 import {getMap} from '../services/map-service';
 // import env from "react-dotenv";
@@ -40,16 +40,34 @@ export default function MapComponent(props) {
 
     let map = useRef();
 
-    useEffect(() => {
-        function fetchTrip() {
-            findMapData(props.trip);
+    // useEffect(() => {
+    //     function fetchTrip() {
+    //         findMapData(props.trip);
+    //         setMapData({
+    //             ...getMapData,
+    //             url: map
+    //         })
+    //     }
+    //     fetchTrip();
+    // }, [getMapData, props.trip_id, map]);
+
+    async function fetchTrip() {
+        console.log(props)
+        try {
+            const data = await findMapData(props.trip);
+            map.current = await getMap(props.trip_id)
             setMapData({
                 ...getMapData,
-                url: map
+                url: map.current
             })
+        } catch (err) {
+            console.log(err.message)
         }
+    }
+
+    useLayoutEffect(() => {
         fetchTrip();
-    }, [getMapData, props.trip_id, map]);
+    }, [props, map])
 
     return(
         <div className="map-component-container">
