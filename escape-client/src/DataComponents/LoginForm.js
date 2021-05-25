@@ -12,7 +12,6 @@ export default function LoginPage(props) {
   });
 
   function handleChange(e) {
-      console.log(e.target.value)
     setFormState(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value
@@ -20,7 +19,6 @@ export default function LoginPage(props) {
   }
 
   async function handleSubmit(e) {
-    console.log(formState)
     e.preventDefault();
     try {
       await login(formState)

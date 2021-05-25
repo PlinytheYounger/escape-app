@@ -2,7 +2,6 @@
 import {useLayoutEffect, useState, useRef} from 'react';
 import {fetchTripProfile} from '../services/trip-service';
 import {getMap} from '../services/map-service';
-// import env from "react-dotenv";
 import './css/tripPlanner.css';
 
 
@@ -15,11 +14,6 @@ export default function MapComponent(props) {
         width: "100%",
         border: "0"
     }
-
-    // const API_KEY = env.API_KEY;
-    // const defaultCenter = {
-    //     lat: 41.3851, lng: 2.1734
-    // }
 
     function findMapData(data) {
         let origin = (data && data.starting_location).replace(" ","");
@@ -38,21 +32,13 @@ export default function MapComponent(props) {
         })
     }    
 
+    //----> TODO: Create markers to map out trip waypoints
+
+    //----> variable store current map value in ref
     let map = useRef();
 
-    // useEffect(() => {
-    //     function fetchTrip() {
-    //         findMapData(props.trip);
-    //         setMapData({
-    //             ...getMapData,
-    //             url: map
-    //         })
-    //     }
-    //     fetchTrip();
-    // }, [getMapData, props.trip_id, map]);
-
+    //----> Function to fetch src url from backend and assign to map.current ref & clean up data to save to state
     async function fetchTrip() {
-        console.log(props)
         try {
             const data = await findMapData(props.trip);
             map.current = await getMap(props.trip_id)
@@ -65,6 +51,7 @@ export default function MapComponent(props) {
         }
     }
 
+    //----> Function to lazy load page data
     useLayoutEffect(() => {
         fetchTrip();
     }, [props, map])
