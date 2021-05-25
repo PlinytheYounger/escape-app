@@ -1,7 +1,7 @@
 # Escape Travel App
 Escape is the only travel application you will ever need to keep your itinerary, expenses and travel companions in order. I created this application as the solution to my multiple spreadsheets and tracking devices I have used in the past to keep tabs on what lodging & travel I've booked, upload and share photos and easily keep tabs on money spent to keep to my budget healthy. 
 
-[https://escape-travel-app.herokuapp.com/](Click here to see the app)
+[https://escape-travel-app.herokuapp.com/] (Click here to see the app)
 
 ## How to use:
 1. Create a profile by signing up
