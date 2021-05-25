@@ -1,7 +1,7 @@
 import {useState, useEffect, useCallback} from 'react';
-import {fetchWallet} from '../../../services/walletService.js';
-import NewExpenseForm from './NewExpenseForm.js';
-import '../tripPlanner.css';
+import {fetchWallet} from '../services/wallet-service.js';
+import NewExpenseForm from '../DataComponents/NewExpenseForm.js';
+// import '../tripPlanner.css';
 
 export default function WalletShow(props) {
     console.log(props)

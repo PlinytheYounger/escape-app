@@ -1,7 +1,7 @@
-import Input from '../FormInputs';
+import Input from '../PresoComponents/FormInputs';
 import {useState} from 'react';
 // import { Button } from '@material-ui/core';
-import {createWallet} from '../../../services/walletService.js';
+import {createWallet} from '../services/wallet-service.js';
 import {Redirect} from 'react-router';
 
 export default function NewBudgetForm(props) {

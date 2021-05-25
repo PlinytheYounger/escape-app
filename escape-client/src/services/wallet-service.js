@@ -1,7 +1,6 @@
-const BASE_URL = 'http://localhost:3001/wallet/';
 
 function createWallet(wallet, trip_id, user_id) {
-  return fetch(`${BASE_URL}${trip_id}/new/${user_id}`, {
+  return fetch(`/api/wallet/${trip_id}/new/${user_id}`, {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json', 
       'Access-Control-Allow-Origin': '*'}),
@@ -15,7 +14,7 @@ function createWallet(wallet, trip_id, user_id) {
 }
 
 function createExpense(expense, wallet_id) {
-  return fetch(`${BASE_URL}new/${wallet_id}`, {
+  return fetch(`/api/wallet/new/${wallet_id}`, {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json', 
       'Access-Control-Allow-Origin': '*'}),
@@ -29,7 +28,7 @@ function createExpense(expense, wallet_id) {
 }
 
 function fetchWallet(user_id, trip_id) {
-  return fetch(`${BASE_URL}${trip_id}/${user_id}`, {
+  return fetch(`/api/wallet/${trip_id}/${user_id}`, {
     method: 'GET',
     headers: new Headers({'Content-Type': 'application/json', 
       'Access-Control-Allow-Origin': '*'}),

@@ -23,7 +23,7 @@ export default function LoginPage(props) {
     try {
       await login(formState)
       props.handleLogin();
-    //   history.push('/')
+      history.push('/')
       
     } catch (err) {
       console.log(err.message)
@@ -56,11 +56,11 @@ export default function LoginPage(props) {
             <button className="buttonStyle" type="submit">
                 <h2 className="h2Font">Login</h2>
             </button>
-            {/* <button className="buttonStyle">
+            <button className="buttonStyle">
                 <Link to='/'>
                     <h2 className="h2Font">Cancel</h2>
                 </Link>
-            </button> */}
+            </button>
         </div>
       </form>
     </div>

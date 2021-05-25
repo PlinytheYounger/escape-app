@@ -1,6 +1,6 @@
 function createTravel(travel, trip_id) {
     console.log(travel, trip_id)
-    return fetch(`${BASE_URL}new/${trip_id}`, {
+    return fetch(`/api/travel/new/${trip_id}`, {
       method: 'POST',
       headers: new Headers({'Content-Type': 'application/json', 
         'Access-Control-Allow-Origin': '*'}),
@@ -14,7 +14,7 @@ function createTravel(travel, trip_id) {
   }
   
   function fetchTravel(travel_id) {
-    return fetch(`${BASE_URL}${travel_id}`, {
+    return fetch(`/api/travel/${travel_id}`, {
       method: 'GET',
       headers: new Headers({'Content-Type': 'application/json', 
         'Access-Control-Allow-Origin': '*'}),

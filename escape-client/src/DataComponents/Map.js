@@ -1,6 +1,5 @@
 // import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 import {useLayoutEffect, useState, useRef} from 'react';
-import {fetchTripProfile} from '../services/trip-service';
 import {getMap} from '../services/map-service';
 import './css/tripPlanner.css';
 
@@ -10,8 +9,8 @@ export default function MapComponent(props) {
     const [getMapData, setMapData] = useState();
     
     const mapStyles = {
-        height: "100%",
-        width: "100%",
+        height: "90%",
+        width: "90%",
         border: "0"
     }
 
@@ -57,7 +56,7 @@ export default function MapComponent(props) {
     }, [props, map])
 
     return(
-        <div className="map-component-container">
+        <div style={mapStyles}>
             <iframe
                 title="map"
                 style={mapStyles}

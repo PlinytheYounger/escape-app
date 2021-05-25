@@ -33,7 +33,7 @@ app.use('/api/user', userRouter)
 app.use('/api/map', mapRouter);
 app.use('/api/activity', activityRouter);
 app.use('/api/travel', travelRouter);
-app.use('/wallet', walletRouter);
+app.use('/api/wallet', walletRouter);
 
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname+'/escape-client/build/index.html'));
