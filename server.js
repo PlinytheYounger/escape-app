@@ -14,7 +14,7 @@ const mainRouter = require('./routes/main.js');
 const tripRouter = require('./routes/trip.js');
 const activityRouter = require('./routes/activity.js');
 const travelRouter = require('./routes/travel.js');
-// const walletRouter = require('./routes/wallet.js');
+const walletRouter = require('./routes/wallet.js');
 const mapRouter = require('./routes/map.js');
 
 require('./config/database');
@@ -28,12 +28,12 @@ app.use(cors());
 app.use(express.json());
 
 // mount routes
-app.use('/api/user', userRouter)
 app.use('/api/trip', tripRouter);
+app.use('/api/user', userRouter)
 app.use('/api/map', mapRouter);
 app.use('/api/activity', activityRouter);
 app.use('/api/travel', travelRouter);
-// app.use('/wallet', walletRouter);
+app.use('/wallet', walletRouter);
 
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname+'/escape-client/build/index.html'));

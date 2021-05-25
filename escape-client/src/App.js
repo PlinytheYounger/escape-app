@@ -7,8 +7,7 @@ import Home from './PresoComponents/Home';
 import Header from './PresoComponents/Header';
 import Footer from './PresoComponents/Footer';
 import UserProfile from './DataComponents/UserProfile.js';
-import TripPlanner from './DataComponents/TripContainer.js';
-// import SignupForm from './Components/UserProfile/SignupForm.js';
+import TripContainer from './DataComponents/TripContainer.js';
 import LoginForm from './DataComponents/LoginForm.js';
 import NewTripForm from './DataComponents/NewTripForm.js';
 // import ActivityShow from './Components/TripPlanner/Activities/ActivityShow.js';
@@ -47,11 +46,11 @@ function App(props) {
         <div className="app-container">
             <Switch>
                 {/* Add path logic to redirect if user is not logged in to login page */}
+                <Route path="/trip/:id">
+                    <TripContainer user={userState.user} {...props}/>
+                </Route>
                 <Route path="/user/:id">
                     <UserProfile user={userState.user} {...props}/>
-                </Route>
-                <Route path="/trip/:id">
-                    <TripPlanner user={userState.user} {...props}/>
                 </Route>
                 <Route path="/trip">
                     <NewTripForm user={userState.user} {...props}/>

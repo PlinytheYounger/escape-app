@@ -1,19 +1,18 @@
+import Input from '../FormInputs';
+import {useState} from 'react';
+import {createTravel} from '../../../services/travelService.js';
 import {useHistory} from 'react-router-dom';
-import {useState, useLayoutEffect} from 'react';
-import {createTrip} from '../services/trip-service.js';
-import {fetchUserProfile} from '../services/user-service.js';
-import Input from '../PresoComponents/FormInputs';
-import './css/tripPlanner.css';
+import '../tripPlanner.css';
 
+export default function NewTravelForm(props) {
 
-export default function NewTripForm(props) {
     const [getFormState, setFormState] = useState({
-        tripForm: {
+        travelForm: {
             name: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Trip Name',
+                    placeholder: 'Travel Name',
                     name: 'name'
                 },
                 validation: {
@@ -23,16 +22,28 @@ export default function NewTripForm(props) {
                 valid: false,
                 value: ''
             },
+            type: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Travel Type',
+                    name: 'name'
+                },
+                validation: {
+                    required: true,
+                },
+                valid: false,
+                value: ''
+            },
             starting_location: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Starting Location',
-                    name: 'starting_location'
+                    name: 'name'
                 },
                 validation: {
                     required: true,
-                    minLength: 5
                 },
                 valid: false,
                 value: ''
@@ -42,91 +53,76 @@ export default function NewTripForm(props) {
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Ending Location',
-                    name: 'ending_location'
+                    name: 'name'
                 },
                 validation: {
                     required: true,
-                    minLength: 5
                 },
                 valid: false,
                 value: ''
             },
-            start_date: {
+            date: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'date',
-                    placeholder: 'Start Date',
-                    name: 'start_date'
+                    placeholder: 'Date of Travel',
+                    name: 'name'
                 },
                 validation: {
-                    required: true
+                    required: true,
                 },
                 valid: false,
                 value: ''
             },
-            end_date: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'date',
-                    placeholder: 'End Date',
-                    name: 'end_date'
-                },
-                validation: {
-                    required: true
-                },
-                valid: false,
-                value: ''
-            },            
-            accessibility_needs: {
+            reservation_number: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Accessibility Needs',
-                    name: 'accessibility_needs'
+                    placeholder: 'Reservation Number',
+                    name: 'name'
                 },
                 validation: {
-                    required: true
+                    required: false,
                 },
                 valid: false,
-                value: false
-            },
+                value: ''                
+            }
         },
         formIsValid: false
-    })
+    });
 
-    const [userState, setUserState] = useState()
     const formElementsArr = [];
 
-    for (let key in getFormState.tripForm) {
+    for (let key in getFormState.travelForm) {
         formElementsArr.push({
             id: key,
-            config: getFormState.tripForm[key],
+            config: getFormState.travelForm[key],
         })
     }
 
     const inputChangedHandler = (event, inputIdentifier) => {
         event.preventDefault();
         // clone state
-        const updatedTripForm = {
-            ...getFormState.tripForm
+        const updatedTravelForm = {
+            ...getFormState.travelForm
         }
         // deep clone
-        const updatedFormElement = {...updatedTripForm[inputIdentifier]}
+        const updatedFormElement = {...updatedTravelForm[inputIdentifier]}
         // set the state element value to the value of the event target value
         updatedFormElement.value = event.target.value;
 
         updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
         
         // update the specific element to the updated form element declared
-        updatedTripForm[inputIdentifier] = updatedFormElement;
+        updatedTravelForm[inputIdentifier] = updatedFormElement;
         let formIsValid = true;
-        for(let key in updatedTripForm) {
-            formIsValid = updatedTripForm[key].valid && formIsValid;
+        for(let key in updatedTravelForm) {
+            formIsValid = updatedTravelForm[key].valid && formIsValid;
         }
  
        // set state to equal the updated contact form with the new values
        setFormState({
-           tripForm: updatedTripForm,
+           travelForm: updatedTravelForm,
            formIsValid: formIsValid
        })
 
@@ -142,43 +138,32 @@ export default function NewTripForm(props) {
         }
         return isValid;
     }
+
     let history = useHistory();
 
     async function handleSubmit(evt) {
         // tried to change this to something else to test and wasn't working...
         let object = {};
-        let user_id = userState._id;
-        for(let key in getFormState.tripForm) {
-            object[key] = getFormState.tripForm[key].value;
+        let trip_id = props.trip._id;
+        for(let key in getFormState.travelForm) {
+            object[key] = getFormState.travelForm[key].value;
         }
         try {
             evt.preventDefault();
-            let data = await createTrip(object, user_id);
-            history.push(`/api/trip/${data._id}`)
+            props.handleClose(evt);
+            await createTravel(object, trip_id);
+            history.push(`/trip/${trip_id}`)
 
         } catch (error) {
             alert(error.message);
         }
     };
 
-    async function fetchUser() {
-        try {
-            const data = await fetchUserProfile(props.user._id);
-            setUserState(data)
-        } catch (err) {
-            console.log(err.message)
-        }
-    }
-
-
-    useLayoutEffect(() => {
-        fetchUser();
-    }, [props.user._id])
-
-    return(
-        <div id="create-new-trip-container">
-        <form className="create-new-trip-form" onSubmit={handleSubmit} >
-            <h2>Create a New Trip:</h2>
+        return(
+        <div id="create-new-travel-container" className="newTravelForm">
+        <button className="closeTravel" onClick={(event) => props.handleClose(event)}>Close</button>
+        <form className="create-new-travel-form" onSubmit={handleSubmit} >
+            <h2>Add Travel Information:</h2>
             {formElementsArr.map((object) => {
                 return(
                     <Input 
@@ -189,11 +174,12 @@ export default function NewTripForm(props) {
                     invalid={getFormState.formIsValid}
                     // shouldValidate={}
                     // touched={}
-                    changed={(event) => inputChangedHandler(event, object.id)}/>
+                    changed={(event) => inputChangedHandler(event, object.id)}
+                    />
                 )
             })}
             
-            <button className="trip-form" type="Success" disabled={!getFormState.formIsValid} >Create New Trip!</button>
+            <button className="activity-button"btnType="Success" disabled={!getFormState.formIsValid} type="submit">Add New Travel!</button>
         </form>
     </div>
 

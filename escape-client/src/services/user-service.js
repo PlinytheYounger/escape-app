@@ -28,7 +28,6 @@ function login(creds) {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*'}),
-    mode: 'no-cors',
     body: JSON.stringify(creds)
   })
   .then(res => {

@@ -1,47 +1,15 @@
-import {useState, useEffect, useLayoutEffect} from 'react';
+import {useState, useLayoutEffect} from 'react';
 import {fetchUserProfile} from '../services/user-service';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 // import {deleteTrip} from '../../services/tripService';
 import {Link} from 'react-router-dom';
 import './css/userprofile.css';
-import {useSSE} from 'use-sse';
 
 export default function UserProfile(props) {
-    
-    /*######################################
-    ######################################
-    STYLING
-    ######################################
-    ######################################*/
-
-    const main_container_style = {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexDirection: "column",
-
-    }
-
-    const user_details_container_style = {
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "row",
-        justifyContent: "space-around",
-        width: "48%",
-        marginBottom: "40px"
-    }
-
-    const accordion_style = {
-        display: "flex",
-        justifyContent: "space-around",
-        alignItems: "center"
-    }
-
-    const accordion_style_two = {
-        display: "flex",
-        justifyContent: "space-around",
-        alignItems: "center",
-        flexDirection: "column"
-    }
     
     /*######################################
     ######################################
@@ -64,6 +32,12 @@ export default function UserProfile(props) {
     //     console.log(data);
     // }
 
+    const initial = () => {
+        let abbrev = props.user.name.splice(0,1);
+        console.log(abbrev)
+        return abbrev;
+    }
+
     const changeDate = (date) => {
         let newDate = new Date(date).toLocaleDateString();
         return newDate;
@@ -77,11 +51,18 @@ export default function UserProfile(props) {
         fetchUser();
     }, [props.user._id])
 
+
+    /*######################################
+    ######################################
+    RETURN
+    ######################################
+    ######################################*/
+
     return(
-        <div className="profile_container" style={main_container_style}>
-            <div className="user_details_container" style={user_details_container_style}>
+        <div className="profile_container"zz>
+            <div className="user_details_container" >
                 <div className="user_image">
-                    <h1>Placeholder for image</h1>
+                    <Avatar className="avatarFont">{initial}</Avatar>
                 </div>
                 <div>
                     <h2>Welcome back, {props.user.name}</h2>
@@ -90,9 +71,15 @@ export default function UserProfile(props) {
                 
             </div>
             <div className="user_information" >
-                <div className={"userPhotos", "accordionContainer"} expanded={expanded === 'panel1' onChange={handleChange('panel1')}>
+                <Accordion className="userPhotos accordionContainer">
+                    <AccordionSummary
+                        // expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                    >
                         <h2>Photo Gallery</h2>
-                    <div className="accordionMain">
+                    </AccordionSummary>
+                    <AccordionDetails>
                             <div>
                                 <h2>placeholder</h2>
                             </div>
@@ -105,12 +92,16 @@ export default function UserProfile(props) {
                             <div>
                                 <h2>placeholder</h2>
                             </div>
-
-                </div>
-                        
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion className="userPhotos accordionContainer">
+                    <AccordionSummary className="accordionMain panel2"
+                        aria-controls="panel2a-content"
+                        id="panel2a-header"
+                    >
                         <h2>Saved Trips</h2>
-                        {/* </AccordionSummary>
-                        <AccordionDetails style={accordion_style_two}> */}
+                    </AccordionSummary>
+                    <AccordionDetails>
                             <div className="savedTrips" >
                                 {userState.trip_ids && userState.trip_ids.map((trip) => {
                                     return (
@@ -126,39 +117,37 @@ export default function UserProfile(props) {
                                     )
                                 })}
                             </div>
-                        {/* </AccordionDetails>
-                    </Accordion>
-                    <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')} >
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel3bh-content"
-                        id="panel3bh-header"
-                        > */}
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion className="userPhotos accordionContainer" expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+                    <AccordionSummary className="accordionMain panel2"
+                        aria-controls="panel3a-content"
+                        id="panel3a-header"
+                    >
                         <h2>Past Trips</h2>
-                        {/* </AccordionSummary>
-                        <AccordionDetails > */}
+                    </AccordionSummary>
+                    <AccordionDetails className="accordionMain panel3">
                         <h3>
                             Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
                             vitae egestas augue. Duis vel est augue.
                         </h3>
-                        {/* </AccordionDetails>
-                    </Accordion>
-                    <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')} >
-                        <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel4bh-content"
-                        id="panel4bh-header"
-                        > */}
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion className="userPhotos accordionContainer" expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                    <AccordionSummary className="accordionMain panel4"
+                        aria-controls="panel4a-content"
+                        id="panel3a-header"
+                    >             
                         <h2>Messages</h2>
-                        {/* </AccordionSummary>
-                        <AccordionDetails > */}
+                    </AccordionSummary>
+                    <AccordionDetails className="accordionMain panel4">
                         <h3>
                             Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
                             vitae egestas augue. Duis vel est augue.
                         </h3>
-                        {/* </AccordionDetails>
-                    </Accordion> */}
-                </div>
+                    </AccordionDetails>
+                </Accordion>
+            </div>
         </div>
     )
 }
