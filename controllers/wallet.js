@@ -27,8 +27,9 @@ function newExpense(req, res) {
 }
 
 function getWallet(req, res) {
-
+    console.log(req.params.user_id, req.params.trip_id)
     Wallet.findOne({'user_id': `${req.params.user_id}`, 'trip_id': `${req.params.trip_id}`}, (err, foundWallet) => {
+        console.log(foundWallet)
         if (err) return handleError(err);
         res.json(foundWallet);
     })

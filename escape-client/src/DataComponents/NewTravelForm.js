@@ -1,8 +1,9 @@
 import Input from '../PresoComponents/FormInputs';
 import {useState} from 'react';
-import {createTravel} from '../../../services/travelService.js';
+import {createTravel} from '../services/travel-service.js';
 import {useHistory} from 'react-router-dom';
-import '../tripPlanner.css';
+import Button from '@material-ui/core/Button';
+// import '../tripPlanner.css';
 
 export default function NewTravelForm(props) {
 
@@ -161,7 +162,7 @@ export default function NewTravelForm(props) {
 
         return(
         <div id="create-new-travel-container" className="newTravelForm">
-        <button className="closeTravel" onClick={(event) => props.handleClose(event)}>Close</button>
+        {/* <button className="closeTravel" onClick={(event) => props.handleClose(event)}>Close</button> */}
         <form className="create-new-travel-form" onSubmit={handleSubmit} >
             <h2>Add Travel Information:</h2>
             {formElementsArr.map((object) => {
@@ -179,7 +180,7 @@ export default function NewTravelForm(props) {
                 )
             })}
             
-            <button className="activity-button"btnType="Success" disabled={!getFormState.formIsValid} type="submit">Add New Travel!</button>
+            <Button className="activity-button"btnType="Success" disabled={!getFormState.formIsValid} type="submit">Add New Travel!</Button>
         </form>
     </div>
 

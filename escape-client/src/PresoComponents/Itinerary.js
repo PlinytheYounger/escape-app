@@ -48,7 +48,6 @@ export default function Itinerary(props) {
 
 async function getTripProfile() {
     let data = await fetchTripProfile(id);
-    console.log(data)
     if(data) {
         let newArr = [];
         for(let a of data.activity_ids) {

@@ -10,8 +10,8 @@ import UserProfile from './DataComponents/UserProfile.js';
 import TripContainer from './DataComponents/TripContainer.js';
 import LoginForm from './DataComponents/LoginForm.js';
 import NewTripForm from './DataComponents/NewTripForm.js';
-// import ActivityShow from './Components/TripPlanner/Activities/ActivityShow.js';
-// import TravelShow from './Components/TripPlanner/Travel/TravelShow.js';
+import ActivityShow from './PresoComponents/ActivityShow.js';
+import TravelShow from './PresoComponents/TravelShow.js';
 
 function App(props) {
 
@@ -55,12 +55,12 @@ function App(props) {
                 <Route path="/trip">
                     <NewTripForm user={userState.user} {...props}/>
                 </Route>
-                {/* <Route path="/activity/:activity_id">
+                <Route path="/api/activity/:activity_id">
                   <ActivityShow {...props} user={userState.user}/>
                 </Route>
-                <Route path="/travel/:travel_id">
+                <Route path="/api/travel/:travel_id">
                   <TravelShow {...props} user={userState.user}/>
-                </Route> */}
+                </Route>
                 <Route path="/new_user/signup">
                     <SignUpForm {...props} handleLogout={handleLogout} handleSignup={handleSignup}/>
                 </Route>

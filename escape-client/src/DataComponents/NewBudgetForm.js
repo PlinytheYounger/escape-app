@@ -3,6 +3,9 @@ import {useState} from 'react';
 // import { Button } from '@material-ui/core';
 import {createWallet} from '../services/wallet-service.js';
 import {Redirect} from 'react-router';
+import Button from '@material-ui/core/Button';
+
+
 
 export default function NewBudgetForm(props) {
     const [getFormState, setFormState] = useState({
@@ -81,7 +84,7 @@ export default function NewBudgetForm(props) {
         try {
             evt.preventDefault();
             await createWallet(object, trip_id, user_id);
-            props.handleClose(evt);
+            // props.handleClose(evt);
             <Redirect push to={`/trip/${trip_id}`}/>
 
         } catch (error) {
@@ -108,9 +111,8 @@ export default function NewBudgetForm(props) {
                 )
             })}
             
-            <button btntype="success" className="closeWallet" disabled={!getFormState.formIsValid} type="submit">Add New Budget!</button>
+            <Button btntype="success" className="closeWallet" disabled={!getFormState.formIsValid} type="submit">Add New Budget!</Button>
         </form>
-        <button className="closeWallet" onClick={(event) => props.handleClose(event)}>Close</button>
     </div>
 
     )

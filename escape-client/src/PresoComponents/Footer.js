@@ -7,7 +7,7 @@ export default function Footer() {
         color: "#5e8d5a",
         fontFamile: "Montserrat",
         fontSize: "20px",
-        height: "10vh",
+        height: "10%",
         width: "100vw",
         display: "flex",
         flexDirection: "row",
@@ -15,13 +15,18 @@ export default function Footer() {
         alignItems: "center"
     }
 
+    const linkStyle = {
+        textDecoration: "none",
+        color: "inherit"
+    }
+
     return(
         <div style={barTheme}>
             <p>Email</p>
-            <p>LinkedIn</p>
+            <p><a style={linkStyle} src="https://www.linkedin.com/in/whitneyleesmith/">LinkedIn</a></p>
             <p>&copy;Whitney Smith 2021</p>
-            <p>Github</p>
-            <p>About Whitney</p>    
+            <p><a style={linkStyle} src="https://github.com/PlinytheYounger">Github</a></p>
+            <p><a style={linkStyle} src="https://whitneysmith.dev/">About Whitney</a></p>    
         </div>
     )
 }

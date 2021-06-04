@@ -5,6 +5,8 @@ import NewActivityForm from './NewActivityForm';
 import Itinerary from '../PresoComponents/Itinerary.js';
 import WalletShow from '../PresoComponents/WalletShow.js';
 import NewBudgetForm from './NewBudgetForm.js';
+import NewTravelForm from './NewTravelForm';
+import NewExpenseForm from './NewExpenseForm';
 // import '../tripPlanner.css';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -17,39 +19,6 @@ import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 
-
-// export default function TabPanel(props) {
-//     const {children, value, index, ...other} = props;
-
-//     // const classes = useStyles();
-//     const [value, setValue] = useState(0);
-//     const [tripState, setTripState] = useState();
-//     const [userState, setUserState] = useState();
-//     // const [modalStyle] = useState(getModalStyle());
-//     const [openActivity, setOpenActivity] = useState(false);
-//     const [openTravel, setOpenTravel] = useState(false);
-//     const [openWallet, setOpenWallet] = useState(false);
-
-
-//     const handleOpen = (evt) => {
-//       if(evt.target.innerText === "Add New Activity") {
-//         setOpenActivity(true)
-//       } else if(evt.target.innerText === "Add New Travel") {
-//         setOpenTravel(true)
-//       } else if(evt.target.innerText === "Add New Budget") {
-//         setOpenWallet(true);
-//       }
-//     };
-
-//     const handleClose = (evt) => {
-//       if(evt.target.className === "closeActivity") {
-//         setOpenActivity(false)
-//       } else if(evt.target.className === "closeTravel") {
-//         setOpenTravel(false)
-//       } else setOpenWallet(false);
-//     };
-
-//----> TODO: Add modal functionality for forms
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -91,7 +60,14 @@ function TabPanel(props) {
     STYLING
     ######################################
     ######################################*/
+    const linkStyle = {
+      textDecoration: "none",
+      color: "black",
+    }
 
+    const listStyle = {
+      border: "1px #c6d7b9 solid"
+    }
 
     /*######################################
     ######################################
@@ -102,6 +78,28 @@ function TabPanel(props) {
     const [value, setValue] = useState(0);
     const [tripState, setTripState] = useState();
     const [userState, setUserState] = useState();
+    const [openActivity, setOpenActivity] = useState(false);
+    const [openTravel, setOpenTravel] = useState(false);
+    const [openWallet, setOpenWallet] = useState(false);
+
+    const handleOpen = (evt) => {
+      console.log(evt.target.innerText)
+      if(evt.target.innerText === "Add New Activity") {
+        setOpenActivity(true)
+      } else if(evt.target.innerText === "Add New Travel") {
+        setOpenTravel(true)
+      } else if(evt.target.innerText === "Add New Budget") {
+        setOpenWallet(true);
+      }
+    };
+
+    const handleClose = (evt) => {
+      if(evt.target.className === "closeActivity") {
+        setOpenActivity(false)
+      } else if(evt.target.className === "closeTravel") {
+        setOpenTravel(false)
+      } else setOpenWallet(false);
+    };
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -118,8 +116,8 @@ function TabPanel(props) {
   
     return (
       <div>
-        <AppBar position="static" backgroundColor="white">
-          <Tabs color="#c6d7b9" value={value} onChange={handleChange} aria-label="scrollable force tabs example">
+        <AppBar position="static" backgroundColor="white" color="#c6d7b9">
+          <Tabs color="#c6d7b9" value={value} onChange={handleChange} aria-label="scrollable force tabs example" variant="scrollable" scrollButtons="on" indicatorColor="#5e8d5a">
             <Tab color="#c6d7b9" label="Itinerary" {...a11yProps(0)} />
             <Tab color="#c6d7b9" label="Activities" {...a11yProps(1)} />
             <Tab color="#c6d7b9" label="Travel" {...a11yProps(2)} />
@@ -137,54 +135,62 @@ function TabPanel(props) {
         <TabPanel value={value} index={1}>
           {tripState && tripState.activity_ids.map((activity) => {
             return(
-              <div key={activity._id}>
-                  <h2>{activity.name}</h2>
+              <div style={listStyle} key={activity._id}>
+                  <h3>{activity.name}</h3>
                   <p>{activity.location}</p>
                   <Button>
-                    <Link to={`/activity/${activity._id}`}>See Detail</Link>
+                    <Link style={linkStyle} to={`/api/activity/${activity._id}`}>See Detail</Link>
                   </Button>
               </div>
               )
             })}
-           <button>
-               Add New Activity
-           </button>
+           {/* <Button onClick={handleOpen}>
+              <h2>Add New Activity</h2>
+           </Button> */}
+          {/* <Modal open={openActivity} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">   */}
+            <NewActivityForm handleClose={handleClose} {...props}/>
+          {/* </Modal> */}
         </TabPanel>
 
         {/*################## TRAVEL ##################*/}
         <TabPanel value={value} index={2}>
+          {/* <Button onClick={handleOpen}>
+              <h2>Add New Travel</h2>
+          </Button> */}
+          {/* <Modal open={openTravel} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">   */}
+            <NewTravelForm handleClose={handleClose} {...props}/>
+          {/* </Modal> */}
           {tripState && tripState.travel_ids.map((travel) => {
             return(
-              <div key={travel._id}>
-                  <h2>{travel.name}</h2>
+              <div style={listStyle} key={travel._id}>
+                  <h3>{travel.name}</h3>
                   <p>{travel.starting_location}</p>
                   <p>{travel.ending_location}</p>
-                  <button>
-                    <Link to={`/travel/${travel._id}`}>See Detail</Link>
-                  </button>
+                  <Button>
+                    <Link style={linkStyle} to={`/api/travel/${travel._id}`}>See Detail</Link>
+                  </Button>
               </div>
             )
           })}
-          <button >
-              Add New Travel
-          </button>
         </TabPanel>
 
         {/*################## WALLET ##################*/}
         <TabPanel value={value} index={3}>
           <div > 
-            <WalletShow trip={tripState} user={userState}/> 
-            <button>
-              Add New Budget
-            </button>
-            <NewBudgetForm trip={tripState} user={userState} />
+            {/* {<WalletShow trip={tripState} user={userState}/>} */}
+            {/* <Button onClick={handleOpen}>
+              <h2>Add New Budget</h2>
+            </Button> */}
+            {/* <Modal open={openWallet} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">   */}
+              <NewBudgetForm trip={tripState} user={userState} />
+            {/* </Modal> */}
           </div>
         </TabPanel>
 
         {/*################## PHOTOS ##################*/}
         <TabPanel value={value} index={4}>
           <div> 
-            <h2>Photos</h2>
+            <h3>Photos</h3>
           </div>
         </TabPanel>
       </div>

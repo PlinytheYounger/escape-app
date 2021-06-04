@@ -2,6 +2,7 @@ import Input from '../PresoComponents/FormInputs';
 import {useState} from 'react';
 import {createActivity} from '../services/activity-service.js';
 import {useHistory} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 // import './activity.css';
 
 export default function NewActivityForm(props) {
@@ -44,8 +45,7 @@ export default function NewActivityForm(props) {
                     name: 'name'
                 },
                 validation: {
-                    required: true,
-                    minLength: 5
+                    required: true
                 },
                 valid: false,
                 value: ''
@@ -139,6 +139,7 @@ export default function NewActivityForm(props) {
         for(let key in getFormState.activityForm) {
             object[key] = getFormState.activityForm[key].value;
         }
+        console.log(object);
         try {
             evt.preventDefault();
             await createActivity(object, trip_id);
@@ -151,7 +152,7 @@ export default function NewActivityForm(props) {
 
     return(
         <div id="create-new-activity-container" className="newActivityForm">
-            <button className="closeActivity" onClick={(event) => props.handleClose(event)}>Close</button>
+            {/* <button className="closeActivity" onClick={(event) => props.handleClose(event)}>Close</button> */}
             <form className="create-new-activity-form" onSubmit={handleSubmit} >
                 <h2>Create a New Activity:</h2>
                 {formElementsArr.map((object) => {
@@ -170,7 +171,7 @@ export default function NewActivityForm(props) {
                     )
                 })}
                 
-                <button className="activity-button" btnType="Success" disabled={!getFormState.formIsValid} type="submit" >Create New Activity!</button>
+                <Button className="activity-button" btnType="Success" disabled={!getFormState.formIsValid} type="submit" >Create New Activity!</Button>
             </form>
         </div>
     )

@@ -56,7 +56,6 @@ export default function MapComponent(props) {
     }, [props, map])
 
     return(
-        <div style={mapStyles}>
             <iframe
                 title="map"
                 style={mapStyles}
@@ -64,6 +63,5 @@ export default function MapComponent(props) {
                 allowFullScreen
                 src={getMapData && getMapData.url}>
             </iframe>
-        </div>
     )
 }

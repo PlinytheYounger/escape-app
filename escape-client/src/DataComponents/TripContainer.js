@@ -1,5 +1,6 @@
 import {useState, useLayoutEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
 import {fetchTripProfile} from '../services/trip-service';
 
@@ -22,16 +23,17 @@ export default function TripContainer(props) {
         justifyContent: "space-around",
         height: "80vh",
         width: "100vw",
-        alignItems: "center"
+        alignItems: "top"
     }
 
-    const leftContainerStyle = {
-        width: "45%",
-    }
+    // const leftContainerStyle = {
+    //     width: "50%",
+    // }
 
-    const rightContainerStyle = {
-        width: "55%"
-    }
+    // const rightContainerStyle = {
+    //     width: "50%",
+    //     height: "100%"
+    // }
 
     /*######################################
     ######################################
@@ -62,13 +64,15 @@ export default function TripContainer(props) {
     ######################################*/
     return(
         <div style={containerStyle}>
-            <div style={leftContainerStyle}>
-                <PanelContainer user={props.user} trip={tripState} />
-            </div>
-            <div style={rightContainerStyle}>
-                <h2>{tripState ? tripState.name : 'Trips!'}</h2>
-                <Map trip={tripState} trip_id={id}/> 
-            </div>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={6} style={leftContainerStyle}>
+                    <PanelContainer user={props.user} trip={tripState} />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <h2>{tripState ? tripState.name : 'Trips!'}</h2>
+                    <Map trip={tripState} trip_id={id}/> 
+                </Grid>
+            </Grid>
         </div> 
     )
 }

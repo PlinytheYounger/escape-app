@@ -28,7 +28,8 @@ function createExpense(expense, wallet_id) {
 }
 
 function fetchWallet(user_id, trip_id) {
-  return fetch(`/api/wallet/${trip_id}/${user_id}`, {
+  console.log(user_id, trip_id)
+  return fetch(`/api/wallet/${user_id}/${trip_id}`, {
     method: 'GET',
     headers: new Headers({'Content-Type': 'application/json', 
       'Access-Control-Allow-Origin': '*'}),

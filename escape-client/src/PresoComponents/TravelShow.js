@@ -1,6 +1,7 @@
-import {fetchTravel} from '../../../services/travelService.js';
-import {useEffect, useState, useCallback} from 'react';
+import {fetchTravel} from '../services/travel-service.js';
+import {useLayoutEffect, useState, useCallback} from 'react';
 import {useParams} from 'react-router';
+import {useHistory} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 export default function TravelShow() {
@@ -8,23 +9,26 @@ export default function TravelShow() {
 
     const {travel_id} = useParams();
 
-    const getTravelProfile = useCallback(() => {
+    async function getTravelProfile() {
         let data = fetchTravel(travel_id);
         setTravelState(data);
-    },[travel_id]);
+    };
 
     const changeDate = (date) => {
         let newDate = new Date(date).toLocaleDateString();
+        console.log(newDate)
         return newDate;
     }
+    let history = useHistory();
 
-    useEffect(() => {
+
+    useLayoutEffect(() => {
         getTravelProfile();
-    },[getTravelProfile])
+    },[travel_id])
 
     return(
         <div>
-            <Button>Back to Trip</Button>
+            <Button className="act-button" onClick={history.goBack}>Back to Trip</Button>
             <h2> {travelState && travelState.name}</h2>
             <h3> {travelState && travelState.location}</h3>
             <h3>{changeDate(travelState && travelState.date)}</h3>

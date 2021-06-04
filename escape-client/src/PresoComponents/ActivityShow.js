@@ -1,7 +1,9 @@
-import {fetchActivity} from '../../../services/activityService.js';
-import {useCallback, useEffect, useState} from 'react';
+import {fetchActivity} from '../services/activity-service.js';
+import {useCallback, useLayoutEffect, useState} from 'react';
 import {useParams} from 'react-router';
 import {useHistory} from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import './css/activity.css';
 
 export default function ActivityShow() {
@@ -9,10 +11,10 @@ export default function ActivityShow() {
 
     const {activity_id} = useParams();
 
-    const getActivityProfile = useCallback(() => {
+    async function getActivityProfile() {
         let data = fetchActivity(activity_id);
         setActivityState(data);
-    },[activity_id]);
+    };
 
     const changeDate = (date) => {
         let newDate = new Date(date).toLocaleDateString();
@@ -20,14 +22,14 @@ export default function ActivityShow() {
     }
     let history = useHistory();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         getActivityProfile();
-    },[getActivityProfile])
+    }, [activity_id]);
 
     return(
         <div className="activity-container">
             <div className="background-image-activity">
-                <button className="act-button" onClick={history.goBack}>Back to Trip</button>
+                <Button className="act-button" onClick={history.goBack}>Back to Trip</Button>
             </div>
             <main>
                 <Typography variant="h6">
@@ -35,7 +37,7 @@ export default function ActivityShow() {
                 </Typography>
                 <h3>{activityState && activityState.location}</h3>
                 <h3>{changeDate(activityState && activityState.date)}</h3>
-                <button className="act-button">Edit Activity</button>
+                <Button className="act-button">Edit Activity</Button>
             </main>
         </div>
 
