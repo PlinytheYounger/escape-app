@@ -1,6 +1,5 @@
 import Input from '../PresoComponents/FormInputs';
 import {useState} from 'react';
-// import { Button } from '@material-ui/core';
 import {createWallet} from '../services/wallet-service.js';
 import {Redirect} from 'react-router';
 import Button from '@material-ui/core/Button';

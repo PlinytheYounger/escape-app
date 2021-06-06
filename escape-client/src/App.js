@@ -1,4 +1,3 @@
-import './App.css';
 import {useState, useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {getUser, logout} from './services/user-service';
@@ -14,6 +13,14 @@ import ActivityShow from './PresoComponents/ActivityShow.js';
 import TravelShow from './PresoComponents/TravelShow.js';
 
 function App(props) {
+
+  const appStyle = {
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    height: "100vh",
+    width: "100vw",
+  }
 
   const [userState, setUserState] = useState({user: getUser()});
   const [showChild, setShowChild] = useState(false);
@@ -40,7 +47,7 @@ function App(props) {
   }
 
   return (
-    <div className="App">
+    <div style={appStyle}>
       <BrowserRouter>
         <Header handleLogout={handleLogout} handleLogin={handleLogin} handleSignup={handleSignup} user={userState.user}/>
         <div className="app-container">

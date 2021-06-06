@@ -15,6 +15,7 @@ function createTrip(trip, user_id) {
 
 
 function deleteTrip(trip_id) {
+  console.log(trip_id);
   return fetch(`/api/trip/delete/${trip_id}`, {
     method: 'DELETE',
     headers: new Headers({'Content-Type': 'application/json',

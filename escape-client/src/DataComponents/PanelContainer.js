@@ -7,7 +7,6 @@ import WalletShow from '../PresoComponents/WalletShow.js';
 import NewBudgetForm from './NewBudgetForm.js';
 import NewTravelForm from './NewTravelForm';
 import NewExpenseForm from './NewExpenseForm';
-// import '../tripPlanner.css';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -18,6 +17,7 @@ import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import Grid from '@material-ui/core/Grid';
 
 
 function TabPanel(props) {
@@ -69,6 +69,11 @@ function TabPanel(props) {
       border: "1px #c6d7b9 solid"
     }
 
+    const containerStyle = {
+      height: "100%",
+      width: "50%"
+    }
+
     /*######################################
     ######################################
     LOGIC
@@ -115,7 +120,7 @@ function TabPanel(props) {
     }, [props.trip, props.user]);
   
     return (
-      <div>
+      <div style={containerStyle}>
         <AppBar position="static" backgroundColor="white" color="#c6d7b9">
           <Tabs color="#c6d7b9" value={value} onChange={handleChange} aria-label="scrollable force tabs example" variant="scrollable" scrollButtons="on" indicatorColor="#5e8d5a">
             <Tab color="#c6d7b9" label="Itinerary" {...a11yProps(0)} />
@@ -144,22 +149,16 @@ function TabPanel(props) {
               </div>
               )
             })}
-           {/* <Button onClick={handleOpen}>
-              <h2>Add New Activity</h2>
-           </Button> */}
-          {/* <Modal open={openActivity} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">   */}
+          <div>
             <NewActivityForm handleClose={handleClose} {...props}/>
-          {/* </Modal> */}
+          </div>
         </TabPanel>
 
         {/*################## TRAVEL ##################*/}
         <TabPanel value={value} index={2}>
-          {/* <Button onClick={handleOpen}>
-              <h2>Add New Travel</h2>
-          </Button> */}
-          {/* <Modal open={openTravel} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">   */}
+          <div>
             <NewTravelForm handleClose={handleClose} {...props}/>
-          {/* </Modal> */}
+          </div>
           {tripState && tripState.travel_ids.map((travel) => {
             return(
               <div style={listStyle} key={travel._id}>
@@ -176,14 +175,8 @@ function TabPanel(props) {
 
         {/*################## WALLET ##################*/}
         <TabPanel value={value} index={3}>
-          <div > 
-            {/* {<WalletShow trip={tripState} user={userState}/>} */}
-            {/* <Button onClick={handleOpen}>
-              <h2>Add New Budget</h2>
-            </Button> */}
-            {/* <Modal open={openWallet} onClose={handleClose} aria-labelledby="simple-modal-title" aria-describedby="simple-modal-description">   */}
+          <div>
               <NewBudgetForm trip={tripState} user={userState} />
-            {/* </Modal> */}
           </div>
         </TabPanel>
 

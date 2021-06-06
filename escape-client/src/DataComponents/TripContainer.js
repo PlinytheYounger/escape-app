@@ -4,8 +4,6 @@ import Grid from '@material-ui/core/Grid';
 
 import {fetchTripProfile} from '../services/trip-service';
 
-import './css/tripPlanner.css';
-
 import Map from './Map.js';
 import PanelContainer from './PanelContainer.js';
 export default function TripContainer(props) {
@@ -19,21 +17,19 @@ export default function TripContainer(props) {
     ######################################*/
     const containerStyle = {
         display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-around",
+        flexDirection: "column",
         height: "80vh",
         width: "100vw",
-        alignItems: "top"
+        alignItems: "center"
     }
 
-    // const leftContainerStyle = {
-    //     width: "50%",
-    // }
-
-    // const rightContainerStyle = {
-    //     width: "50%",
-    //     height: "100%"
-    // }
+    const mainStyle={
+        height: "90%",
+        width: "100%",
+        display: "flex", 
+        flexDirection: "row",
+        justifyContent: "space-around"
+    }
 
     /*######################################
     ######################################
@@ -64,15 +60,11 @@ export default function TripContainer(props) {
     ######################################*/
     return(
         <div style={containerStyle}>
-            <Grid container spacing={3}>
-                <Grid item xs={12} sm={6} style={leftContainerStyle}>
-                    <PanelContainer user={props.user} trip={tripState} />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <h2>{tripState ? tripState.name : 'Trips!'}</h2>
-                    <Map trip={tripState} trip_id={id}/> 
-                </Grid>
-            </Grid>
-        </div> 
+            <h2>{tripState ? tripState.name : 'Trips!'}</h2>
+            <main style={mainStyle}>
+                <PanelContainer user={props.user} trip={tripState} />
+                <Map trip={tripState} trip_id={id}/> 
+            </main>
+        </div>
     )
 }

@@ -3,7 +3,6 @@ import {useState} from 'react';
 import {createTravel} from '../services/travel-service.js';
 import {useHistory} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-// import '../tripPlanner.css';
 
 export default function NewTravelForm(props) {
 

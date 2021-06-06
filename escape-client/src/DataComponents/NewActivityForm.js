@@ -3,7 +3,6 @@ import {useState} from 'react';
 import {createActivity} from '../services/activity-service.js';
 import {useHistory} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-// import './activity.css';
 
 export default function NewActivityForm(props) {
 

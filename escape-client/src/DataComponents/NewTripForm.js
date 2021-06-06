@@ -4,7 +4,6 @@ import {createTrip} from '../services/trip-service.js';
 import {fetchUserProfile} from '../services/user-service.js';
 import Input from '../PresoComponents/FormInputs';
 import Button from '@material-ui/core/Button';
-import './css/tripPlanner.css';
 
 
 export default function NewTripForm(props) {
