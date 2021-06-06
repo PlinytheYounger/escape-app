@@ -1,15 +1,72 @@
 import {useState, useLayoutEffect} from 'react';
 import {fetchUserProfile} from '../services/user-service';
+import {deleteTrip} from '../services/trip-service';
+
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Avatar from '@material-ui/core/Avatar';
-// import {deleteTrip} from '../../services/tripService';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button'; 
 import {Link} from 'react-router-dom';
-import './css/userprofile.css';
 
 export default function UserProfile(props) {
-    
+    /*######################################
+    ######################################
+    STYLING
+    ######################################
+    ######################################*/
+    const avatarFont = {
+        backgroundColor: "#c6d7b9",
+        color: "#5e8d5a"
+    }
+
+    const userDetailStyle = {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        color: "#5e8d5a",
+        fontFamily: "Montserrat"
+    }
+
+    const accordStyle = {
+        height: "80vh",
+        width: "100%",
+        color: "#5e8d5a",
+        fontFamily: "Montserrat"
+    }
+
+    const tripStyle = {
+        color: "#5e8d5a",
+        backgroundColor: "white",
+        border: "2px solid #5e8d5a",
+        margin: "2%",
+        width: "90%",
+        fontFamily: "Montserrat",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center"
+
+    }
+
+    const tripName = {
+        marginRight: "5%" 
+    }
+
+    const linkStyle = {
+        textDecoration: "none",
+        color: "#5e8d5a",
+        fontFamily: "Montserrat"
+    }
+
+    const flexStyle = {
+        display: "flex",
+        flexDirection: "column",
+        width: "100%"
+    }
+
     /*######################################
     ######################################
     LOGIC / FUNCTIONS
@@ -24,28 +81,27 @@ export default function UserProfile(props) {
     };
 
 
-    // function deleteTrip(id) {
+    function deleteTrip(event, id) {
+        console.log(event)
+        console.log(id)
+        const data = deleteTrip(id);    
+        console.log(data);
+    }
+
+    // function editTrip(id) {
     //     console.log(id)
     //     // event.preventDefault();
-    //     const data = deleteTrip(id);    
-    //     console.log(data);
+    //     // const data = deleteTrip(id);    
+    //     // console.log(data);
     // }
 
-    const initial = () => {
-        let abbrev = props.user.name.splice(0,1);
-        console.log(abbrev)
-        return abbrev;
-    }
-
-    const changeDate = (date) => {
-        let newDate = new Date(date).toLocaleDateString();
-        return newDate;
-    }
+    let initial = ""
 
     useLayoutEffect(() => {
         async function fetchUser() {
             const user = await fetchUserProfile(props.user._id)
             setUserState(user)
+            initial = user.name.slice(0,1);
         }
         fetchUser();
     }, [props.user._id])
@@ -58,10 +114,10 @@ export default function UserProfile(props) {
     ######################################*/
 
     return(
-        <div className="profile_container"zz>
-            <div className="user_details_container" >
+        <div className="profile_container">
+            <div style={userDetailStyle}>
                 <div className="user_image">
-                    <Avatar className="avatarFont">{initial}</Avatar>
+                    <Avatar style={avatarFont}>{initial}</Avatar>
                 </div>
                 <div>
                     <h2>Welcome back, {props.user.name}</h2>
@@ -69,59 +125,48 @@ export default function UserProfile(props) {
                 </div>
                 
             </div>
-            <div className="user_information" >
-                <Accordion className="userPhotos accordionContainer">
+            <div style={accordStyle}>
+                <Accordion className="accordionContainer">
                     <AccordionSummary
-                        // expandIcon={<ExpandMoreIcon />}
+                        expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
                         <h2>Photo Gallery</h2>
                     </AccordionSummary>
                     <AccordionDetails>
-                            <div>
-                                <h2>placeholder</h2>
-                            </div>
-                            <div>
-                                <h2>placeholder</h2>
-                            </div>
-                            <div>
-                                <h2>placeholder</h2>
-                            </div>
-                            <div>
-                                <h2>placeholder</h2>
-                            </div>
+                        <p>Placeholder</p>
                     </AccordionDetails>
                 </Accordion>
-                <Accordion className="userPhotos accordionContainer">
+                <Accordion className="accordionContainer">
                     <AccordionSummary className="accordionMain panel2"
                         aria-controls="panel2a-content"
                         id="panel2a-header"
+                        expandIcon={<ExpandMoreIcon />}
                     >
                         <h2>Saved Trips</h2>
                     </AccordionSummary>
-                    <AccordionDetails>
-                            <div className="savedTrips" >
-                                {userState.trip_ids && userState.trip_ids.map((trip) => {
-                                    return (
-                                        <div key={trip._id}>
-                                            <button className="button-user">
-                                                <Link to={`/trip/${trip._id}`} className="linkStyle">
-                                                        <h2 className="tripName">{trip.name}</h2>
-                                                        <h2 className="tripDates">{changeDate(trip.start_date)} - {changeDate(trip.end_date)}</h2>
-                                                </Link>
-                                            </button>
-                                            {/* <button onClick={() => deleteTrip(trip._id)}>Delete Trip</button> */}
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                    <AccordionDetails style={flexStyle}>
+                        {userState.trip_ids && userState.trip_ids.map((trip) => {
+                            return (
+                                <div key={trip._id} style={tripStyle}>
+                                    <Link to={`/trip/${trip._id}`} style={linkStyle}>
+                                            <h2 style={tripName}>{trip.name}</h2>
+                                    </Link>
+                                    <Button style={linkStyle}>
+                                        <Link to={`/`} style={linkStyle}>Edit Trip</Link>
+                                    </Button>
+                                    <Button style={linkStyle}>Delete Trip</Button>
+                                </div>
+                            )
+                        })}
                     </AccordionDetails>
                 </Accordion>
-                <Accordion className="userPhotos accordionContainer" expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+                <Accordion className="accordionContainer" expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                     <AccordionSummary className="accordionMain panel2"
                         aria-controls="panel3a-content"
                         id="panel3a-header"
+                        expandIcon={<ExpandMoreIcon />}
                     >
                         <h2>Past Trips</h2>
                     </AccordionSummary>
@@ -132,10 +177,11 @@ export default function UserProfile(props) {
                         </h3>
                     </AccordionDetails>
                 </Accordion>
-                <Accordion className="userPhotos accordionContainer" expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                <Accordion className="accordionContainer" expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
                     <AccordionSummary className="accordionMain panel4"
                         aria-controls="panel4a-content"
                         id="panel3a-header"
+                        expandIcon={<ExpandMoreIcon />}
                     >             
                         <h2>Messages</h2>
                     </AccordionSummary>

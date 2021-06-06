@@ -46,7 +46,6 @@ function getMap(req, res) {
         if(err) {
             console.log(err)
         } else {
-            console.log(gUrl);
             res.json(gUrl);
         }
     })

@@ -26,7 +26,7 @@ function editTrip() {
 
 function deleteTrip(req, res) {
     console.log(req.params.id)
-    Trip.deleteOne({id: req.params.id}, (err, deletedTrip) => {
+    Trip.deleteOne({_id: req.params.id}, (err, deletedTrip) => {
         res.json(deletedTrip)
     })
 }

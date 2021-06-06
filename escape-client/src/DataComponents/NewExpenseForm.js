@@ -2,6 +2,8 @@ import Input from '../PresoComponents/FormInputs';
 import {useState} from 'react';
 import {createExpense} from '../services/wallet-service.js';
 import {useHistory} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+
 // import '../tripPlanner.css';
 
 export default function NewExpenseForm(props) {
@@ -130,7 +132,7 @@ export default function NewExpenseForm(props) {
                 )
             })}
             
-            <button btnType="Success" className="expense-button" disabled={!getFormState.formIsValid} type="submit">Add New Expense!</button>
+            <Button btnType="Success" className="expense-button" disabled={!getFormState.formIsValid} type="submit">Add New Expense!</Button>
         </form>
     </div>
 

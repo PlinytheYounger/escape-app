@@ -1,4 +1,3 @@
-import './App.css';
 import {useState, useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {getUser, logout} from './services/user-service';
@@ -10,10 +9,18 @@ import UserProfile from './DataComponents/UserProfile.js';
 import TripContainer from './DataComponents/TripContainer.js';
 import LoginForm from './DataComponents/LoginForm.js';
 import NewTripForm from './DataComponents/NewTripForm.js';
-// import ActivityShow from './Components/TripPlanner/Activities/ActivityShow.js';
-// import TravelShow from './Components/TripPlanner/Travel/TravelShow.js';
+import ActivityShow from './PresoComponents/ActivityShow.js';
+import TravelShow from './PresoComponents/TravelShow.js';
 
 function App(props) {
+
+  const appStyle = {
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    height: "100vh",
+    width: "100vw",
+  }
 
   const [userState, setUserState] = useState({user: getUser()});
   const [showChild, setShowChild] = useState(false);
@@ -40,7 +47,7 @@ function App(props) {
   }
 
   return (
-    <div className="App">
+    <div style={appStyle}>
       <BrowserRouter>
         <Header handleLogout={handleLogout} handleLogin={handleLogin} handleSignup={handleSignup} user={userState.user}/>
         <div className="app-container">
@@ -55,12 +62,12 @@ function App(props) {
                 <Route path="/trip">
                     <NewTripForm user={userState.user} {...props}/>
                 </Route>
-                {/* <Route path="/activity/:activity_id">
+                <Route path="/api/activity/:activity_id">
                   <ActivityShow {...props} user={userState.user}/>
                 </Route>
-                <Route path="/travel/:travel_id">
+                <Route path="/api/travel/:travel_id">
                   <TravelShow {...props} user={userState.user}/>
-                </Route> */}
+                </Route>
                 <Route path="/new_user/signup">
                     <SignUpForm {...props} handleLogout={handleLogout} handleSignup={handleSignup}/>
                 </Route>

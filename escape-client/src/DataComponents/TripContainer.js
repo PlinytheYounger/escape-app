@@ -1,9 +1,8 @@
 import {useState, useLayoutEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
 import {fetchTripProfile} from '../services/trip-service';
-
-import './css/tripPlanner.css';
 
 import Map from './Map.js';
 import PanelContainer from './PanelContainer.js';
@@ -18,19 +17,18 @@ export default function TripContainer(props) {
     ######################################*/
     const containerStyle = {
         display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-around",
+        flexDirection: "column",
         height: "80vh",
         width: "100vw",
         alignItems: "center"
     }
 
-    const leftContainerStyle = {
-        width: "45%",
-    }
-
-    const rightContainerStyle = {
-        width: "55%"
+    const mainStyle={
+        height: "90%",
+        width: "100%",
+        display: "flex", 
+        flexDirection: "row",
+        justifyContent: "space-around"
     }
 
     /*######################################
@@ -62,13 +60,11 @@ export default function TripContainer(props) {
     ######################################*/
     return(
         <div style={containerStyle}>
-            <div style={leftContainerStyle}>
+            <h2>{tripState ? tripState.name : 'Trips!'}</h2>
+            <main style={mainStyle}>
                 <PanelContainer user={props.user} trip={tripState} />
-            </div>
-            <div style={rightContainerStyle}>
-                <h2>{tripState ? tripState.name : 'Trips!'}</h2>
                 <Map trip={tripState} trip_id={id}/> 
-            </div>
-        </div> 
+            </main>
+        </div>
     )
 }

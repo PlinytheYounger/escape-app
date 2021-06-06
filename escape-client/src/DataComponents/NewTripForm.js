@@ -3,7 +3,7 @@ import {useState, useLayoutEffect} from 'react';
 import {createTrip} from '../services/trip-service.js';
 import {fetchUserProfile} from '../services/user-service.js';
 import Input from '../PresoComponents/FormInputs';
-import './css/tripPlanner.css';
+import Button from '@material-ui/core/Button';
 
 
 export default function NewTripForm(props) {
@@ -193,7 +193,7 @@ export default function NewTripForm(props) {
                 )
             })}
             
-            <button className="trip-form" type="Success" disabled={!getFormState.formIsValid} >Create New Trip!</button>
+            <Button className="trip-form" type="Success" disabled={!getFormState.formIsValid} >Create New Trip!</Button>
         </form>
     </div>
 

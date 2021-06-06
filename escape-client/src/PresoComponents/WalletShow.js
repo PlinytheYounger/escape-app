@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useLayoutEffect, useCallback} from 'react';
 import {fetchWallet} from '../services/wallet-service.js';
 import NewExpenseForm from '../DataComponents/NewExpenseForm.js';
 // import '../tripPlanner.css';
@@ -17,35 +17,42 @@ export default function WalletShow(props) {
         return sum;
     }
 
-    const getWalletProfile = useCallback(() => {
+    async function getWalletProfile() {
         const data = fetchWallet(props.user._id, props.trip._id);
-        setWalletState(data);
-    },[props.user._id, props.trip._id]);
+        console.log(data)
+        if(data === null) {
+            return;
+        } else {
+            setWalletState(data);
+        }
+    };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         getWalletProfile();
-    }, [getWalletProfile])
+    }, [props.user, props.trip])
 
     return(
         <div className="budget-grid">
-            <div className="expense-container">
-                <h2>Total Budget: ${walletState && walletState.budget}</h2>
-                <h2>Available Budget: ${walletState ? walletState && calcBudget() : walletState && walletState.budget}</h2>
-                <table className="expenseTable">
-                    <tr>
-                        <th>Expense</th>
-                        <th>Cost</th>
-                    </tr>
-                    {walletState && walletState.expenses.map((expense) => {
-                        return (
-                            <tr>
-                                <td>{expense.name}</td>
-                                <td>${expense.amount}</td>
-                            </tr>
-                        )
-                    })}
-                </table>
-            </div>
+            {walletState ? 
+                <div className="expense-container">
+                    <h2>Total Budget: ${walletState && walletState.budget}</h2>
+                    {/* <h2>Available Budget: ${walletState ? walletState && calcBudget() : walletState && walletState.budget}</h2> */}
+                    <table className="expenseTable">
+                        <tr>
+                            <th>Expense</th>
+                            <th>Cost</th>
+                        </tr>
+                        {walletState && walletState.expenses.map((expense) => {
+                            return (
+                                <tr>
+                                    <td>{expense.name}</td>
+                                    <td>${expense.amount}</td>
+                                </tr>
+                            )
+                        })}
+                    </table>
+                </div>
+                : <h2>No Budget Created!</h2>}
             <div className="new-expense">{walletState && walletState.budget ? <NewExpenseForm wallet={walletState} trip={props.trip}/> : ""} </div>
         </div>
     )
